@@ -1,38 +1,32 @@
 extends KinematicBody2D
 
-onready var sprite 	 = get_node("AnimatedSprite")
-onready var collider = get_node("CollisionShape")
+# Variables:
+export (int) var speed = 200					#Velocidad con la que se mueve
+export (int) var jump_speed = -200				#Fuerza de salto
+export (int) var gravity = 500					#Fuerza de gravedad
 
-export (int) var speed = 200
+export (float, 0, 1.0) var friction = 0.1		#Fricción
+export (float, 0, 1.0) var acceleration = 0.5  #Aceleración
 
-var velocity: Vector2 = Vector2.ZERO
-var contador: int = 0
+var velocity = Vector2.ZERO
 
-# Esta función se repite
-func _physics_process(_delta):
-	get_input()
-	velocity = move_and_slide(velocity)
-	contador += 1
-	
-# Función para detectar entradas de teclado.	
+# Funcion para detectar entradas de teclado
 func get_input():
-	velocity = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-		sprite.play("run")
-		sprite.flip_h = false
+    var dir = 0
+    if Input.is_action_pressed("ui_right"):
+        dir += 1
+    if Input.is_action_pressed("ui_left"):
+        dir -= 1
+    if dir != 0:
+        velocity.x = lerp(velocity.x, dir * speed, acceleration)
+    else:
+        velocity.x = lerp(velocity.x, 0, friction)
 
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-		sprite.play("run")
-		sprite.flip_h = true
-
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
-
-	if velocity == Vector2(0,0):
-		sprite.play("idle")	
-	velocity = velocity.normalized() * speed
+# Loop principal del personaje
+func _physics_process(delta):
+	get_input()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+	if Input.is_action_just_pressed("ui_up"):
+		if is_on_floor():
+			velocity.y = jump_speed				
