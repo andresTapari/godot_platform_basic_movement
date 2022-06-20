@@ -9,6 +9,7 @@ export (int) var gravity = 500					#Fuerza de gravedad
 export (float, 0, 1.0) var friction = 0.1		#Fricción
 export (float, 0, 1.0) var acceleration = 0.5	#Aceleración
 
+export (Curve) var acceleration_curve = Curve()
 var velocity = Vector2.ZERO
 
 # Funcion para detectar entradas de teclado
