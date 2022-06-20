@@ -9,8 +9,16 @@ export (int) var gravity = 500					#Fuerza de gravedad
 export (float, 0, 1.0) var friction = 0.1		#Fricción
 export (float, 0, 1.0) var acceleration = 0.5	#Aceleración
 
-export (Curve) var acceleration_curve = Curve()
+export (Curve) var acceleration_curve
+
 var velocity = Vector2.ZERO
+
+# 
+func _ready() -> void:
+	if acceleration_curve == null:
+		print_debug("ERROR: no se establecio curva de movimiento")
+		pass
+	
 
 # Funcion para detectar entradas de teclado
 func get_input():
