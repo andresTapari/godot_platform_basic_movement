@@ -11,4 +11,4 @@ Ejemplo básico del movimiento del personaje en un juego de plataformas.
 - [ ] 
 
 # Assets:
-Los assets los descargue de ![aqui](https://jesse-m.itch.io/jungle-pack):
+Los assets los descargue de [aqui](https://jesse-m.itch.io/jungle-pack):
