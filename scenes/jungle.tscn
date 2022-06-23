@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/res/jungle_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/hero.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/Jungle Asset Pack/parallax background/plx-3.png" type="Texture" id=5]
 [ext_resource path="res://assets/Jungle Asset Pack/parallax background/plx-5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Jungle Asset Pack/parallax background/plx-4.png" type="Texture" id=7]
+[ext_resource path="res://script/interpolated_camera.gd" type="Script" id=8]
 
 [node name="Node2D" type="Node2D"]
 __meta__ = {
@@ -84,14 +85,18 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 458761, 2, 0, 458762, 2, 1, 458763, 2, 1, 458764, 2, 2, 524297, 2, 131072, 524298, 2, 131073, 524299, 2, 131073, 524300, 2, 131074, 655384, 4, 0, 655385, 4, 1, 655386, 4, 1, 655387, 4, 2, 720920, 4, 131072, 720921, 4, 131073, 720922, 4, 131073, 720923, 4, 131074, 786441, 4, 0, 786442, 4, 1, 786443, 4, 2, 786448, 4, 0, 786449, 4, 1, 786450, 4, 1, 786451, 4, 2, 851973, 4, 0, 851974, 4, 2, 851977, 4, 65536, 851978, 4, 65537, 851979, 4, 65538, 851984, 4, 65536, 851985, 4, 65537, 851986, 4, 65537, 851987, 4, 65538, 917509, 4, 131072, 917510, 4, 131074, 917513, 4, 131072, 917514, 4, 131073, 917515, 4, 131074, 917520, 4, 131072, 917521, 4, 131073, 917522, 4, 131073, 917523, 4, 131074, 983067, 2, 0, 983068, 2, 1, 983069, 2, 1, 983070, 2, 1, 983071, 2, 2, 1048603, 2, 65536, 1048604, 2, 65537, 1048605, 2, 65537, 1048606, 2, 65537, 1048607, 2, 65538, 1114139, 2, 65536, 1114140, 2, 65537, 1114141, 2, 65537, 1114142, 2, 65537, 1114143, 2, 65538, 1179656, 4, 0, 1179657, 4, 2, 1179668, 4, 0, 1179669, 4, 1, 1179670, 4, 1, 1179671, 4, 2, 1179675, 2, 65536, 1179676, 2, 65537, 1179677, 2, 65537, 1179678, 2, 65537, 1179679, 2, 65538, 1245192, 4, 65536, 1245193, 4, 65538, 1245204, 4, 65536, 1245205, 4, 65537, 1245206, 4, 65537, 1245207, 4, 65538, 1245211, 2, 131072, 1245212, 2, 131073, 1245213, 2, 131073, 1245214, 2, 131073, 1245215, 2, 131074, 1310728, 4, 65536, 1310729, 4, 65538, 1310740, 4, 131072, 1310741, 4, 131073, 1310742, 4, 131073, 1310743, 4, 131074, 1310744, 4, 0, 1376264, 4, 131072, 1376265, 4, 131074 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 270, 194 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+script = ExtResource( 8 )
+camera_target = NodePath("../KinematicBody2D")
+x_reaction = 1.0
+y_reaction = 0.01
+
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 200, 296 )
+position = Vector2( 263, 295 )
 speed = 100
 gravity = 400
 friction = 0.9
 acceleration = 0.7
-
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
-position = Vector2( 95, -120 )
-current = true
-zoom = Vector2( 0.5, 0.5 )
