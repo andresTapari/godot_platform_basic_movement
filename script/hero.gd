@@ -1,5 +1,5 @@
+# hero.gd
 extends KinematicBody2D
-# Movimiento lineal
 
 # Variables:
 export (int) var speed = 200					#Velocidad con la que se mueve

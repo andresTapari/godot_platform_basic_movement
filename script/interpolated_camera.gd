@@ -3,8 +3,8 @@ extends Camera2D
 # Variables de 
 export var camera_top_speed = 10					# Camara velocidad tope
 export (NodePath) var camera_target = null			# Target a seguir
-export (float, 0.01 , 1) var x_reaction = .7		# Reaccion en x
-export (float, 0.01 , 1) var y_reaction = .7		# Reaccion en x
+export (float, 0.01 , 1) var x_reaction = .2		# Reaccion en x
+export (float, 0.01 , 1) var y_reaction = .2		# Reaccion en x
 export (int, -100 , 100) var x_offset = 0			# Offset en x
 export (int, -100 , 100) var y_offset = -50			# Offset en y
 
