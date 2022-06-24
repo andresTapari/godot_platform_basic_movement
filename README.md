@@ -5,9 +5,10 @@ El objetivo del proyecto es crear un ejemplo simple pero didactico del movimient
 
 # Cosas para hacer:
 - [x] Fondo Parallax
-- [ ] Movimiento del personaje
-- [ ] Animaciones del personaje
 - [x] Interpolación de la camara
+- [ ] Movimiento del personaje (script)
+- [ ] Movimiento del personaje (visual script)
+- [ ] Animaciones del personaje
 - [ ] Agarre de borde
 - [ ] Dialogos
 - [ ] Hud
