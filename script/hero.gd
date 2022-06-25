@@ -16,75 +16,73 @@ onready var sprite = get_node("Sprite")
 # Variables internas
 onready var state_machine = animation_tree_node.get("parameters/playback")
 var is_on_edge: bool = false
-
 var velocity = Vector2.ZERO
+
+enum state {idle,					# estar
+			run,					# correr
+			jump,					# saltar
+			fall,					# caer
+			on_edge					# borde
+		}
+var current_state = state.idle
 
 # Inicio del personaje:
 func _ready() -> void:
 	state_machine.start("idle")
 
 # Funcion para detectar entradas de teclado
-func get_input() -> void:
-	var dir = 0
+func _physics_process(delta) -> void:
+	var dir: int = 0
 	if Input.is_action_pressed("ui_right"):
 		sprite.flip_h = false
 		dir += 1
 		rayCast.scale.x = 1
+	
 	if Input.is_action_pressed("ui_left"):
 		sprite.flip_h = true
 		dir -= 1
 		rayCast.scale.x = -1
+	
 	if Input.is_action_pressed('ui_down'):
 		is_on_edge = false
-	if dir != 0:
-		#state_machine.travel("run")
-		velocity.x = lerp(velocity.x, dir * speed, acceleration)
-	else:
-		#state_machine.travel("idle")
-		velocity.x = lerp(velocity.x, 0, friction)
-	if Input.is_action_just_pressed("ui_up"):
+	
+	if Input.is_action_pressed("ui_up"):
 		if is_on_floor():
-			state_machine.travel("jump")
 			velocity.y = jump_speed
 		if is_on_edge:
 			is_on_edge = false
-			state_machine.travel("jump")
 			velocity.y = jump_speed
-		else:
-			state_machine.travel("falling")
-	
-	# Actualizamos las animaciones
-	if int(velocity.length()) ==  0 or is_on_floor():	#si esta quieto o esta sobre el suelo
-		state_machine.travel("idle")
-	
-	if abs(velocity.x) > 50:							# si su movimiento en x es mayor a 50
-		state_machine.travel("run")
-	
-	if velocity.y < 0:
-		state_machine.travel("jump")					# si se mueve hacia arriba
 
-	elif velocity.y > 0 and !is_on_edge: 
-		state_machine.travel("falling")					# si se mueve hacia abajo
-	
-	if is_on_edge:
-		state_machine.travel("edge_grab")
-
-func _physics_process(delta) -> void:
-	get_input()
-	#velocity.y += gravity * delta
-	#Agarre de borde
-	rayCastEdge.update()
-	rayCastWall.update()
-
-	if !rayCastEdge.is_colliding() and rayCastWall.is_colliding() and !is_on_edge and !is_on_floor():
-		rayCastWall.enabled = false
-		is_on_edge = true
-
-	if is_on_edge:
-		velocity.y = 0
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * speed, acceleration)
 	else:
-		velocity.y += gravity * delta
+		velocity.x = lerp(velocity.x, 0, friction)
 
-	if is_on_floor():
-		rayCastWall.enabled = true
+	
+	update_animation(velocity)
+	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func update_animation(current_direction: Vector2) -> void:
+	# Animacion de correr o estar:
+	if is_on_floor():
+		if abs(current_direction.x) > 50:
+			state_machine.travel('run')
+		else:
+			state_machine.travel('idle')
+	
+	# Animacion de saltar:
+	if current_direction.y < 0:
+		state_machine.travel('jump')
+	
+	# Animacion de caer o agarrar borde
+	elif !is_on_floor():
+		if !is_on_edge:
+			state_machine.travel('falling')
+		else:
+			state_machine.travel('edge_grab')
+
+func check_grab_edge(current_velocity) -> Vector2:
+	
+	return current_velocity
