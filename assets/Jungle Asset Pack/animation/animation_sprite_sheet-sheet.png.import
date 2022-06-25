@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ledge grab outline.png-acc37b955040389a3ed4f0dc9a394d32.stex"
+path="res://.import/animation_sprite_sheet-sheet.png-9086c1aaf0326cfb162e0d9819533e86.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Jungle Asset Pack/animation/ledge grab outline.png"
-dest_files=[ "res://.import/ledge grab outline.png-acc37b955040389a3ed4f0dc9a394d32.stex" ]
+source_file="res://assets/Jungle Asset Pack/animation/animation_sprite_sheet-sheet.png"
+dest_files=[ "res://.import/animation_sprite_sheet-sheet.png-9086c1aaf0326cfb162e0d9819533e86.stex" ]
 
 [params]
 

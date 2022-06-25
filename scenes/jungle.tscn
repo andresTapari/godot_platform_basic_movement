@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/res/jungle_tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/hero.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/Jungle Asset Pack/parallax background/plx-5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Jungle Asset Pack/parallax background/plx-4.png" type="Texture" id=7]
 [ext_resource path="res://script/interpolated_camera.gd" type="Script" id=8]
-[ext_resource path="res://visual_script/hero.vs" type="Script" id=9]
 
 [node name="Node2D" type="Node2D"]
 __meta__ = {
@@ -94,7 +93,4 @@ camera_target = NodePath("../KinematicBody2D")
 x_reaction = 0.179
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 240, 104 )
-script = ExtResource( 9 )
-friction = 0.1
-gravedad = 400.0
+position = Vector2( 272, 176 )
