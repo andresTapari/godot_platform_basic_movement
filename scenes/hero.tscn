@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/res/hero_animation_player.tres" type="Animation" id=1]
 [ext_resource path="res://script/hero.gd" type="Script" id=2]
+[ext_resource path="res://assets/fuentes/TTF/dogica.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -140,9 +141,15 @@ states/run/node = SubResource( 31 )
 states/run/position = Vector2( 478, 225 )
 transitions = [ "idle", "run", SubResource( 32 ), "run", "idle", SubResource( 33 ), "run", "jump", SubResource( 34 ), "jump", "run", SubResource( 35 ), "jump", "idle", SubResource( 36 ), "idle", "jump", SubResource( 37 ), "jump", "edge_grab", SubResource( 38 ), "edge_grab", "jump", SubResource( 39 ), "falling", "idle", SubResource( 40 ), "run", "falling", SubResource( 41 ), "jump", "falling", SubResource( 42 ) ]
 start_node = "idle"
-graph_offset = Vector2( 69, -28 )
+graph_offset = Vector2( -95, -298 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
+
+[sub_resource type="DynamicFont" id=44]
+size = 8
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -155,19 +162,19 @@ shape = SubResource( 1 )
 [node name="RayCast" type="Position2D" parent="."]
 
 [node name="RayCast2D_wall" type="RayCast2D" parent="RayCast"]
-position = Vector2( 0, -13 )
+position = Vector2( 0, -14 )
 enabled = true
 cast_to = Vector2( 15, 0 )
 
 [node name="RayCast2D_edge" type="RayCast2D" parent="RayCast"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -20 )
 enabled = true
 cast_to = Vector2( 15, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 4 )
 hframes = 30
-frame = 24
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 43 )
@@ -182,3 +189,27 @@ tree_root = SubResource( 25 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 26 )
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -40.0
+margin_right = 24.0
+margin_bottom = -26.0
+custom_colors/font_color = Color( 0.431373, 0.752941, 0.607843, 1 )
+custom_fonts/font = SubResource( 44 )
+text = "IDLE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
