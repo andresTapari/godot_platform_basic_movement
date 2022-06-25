@@ -1,5 +1,5 @@
-# hero.gd
 extends KinematicBody2D
+# Movimiento lineal
 
 # Variables:
 export (int) var speed = 200					#Velocidad con la que se mueve
@@ -12,7 +12,7 @@ export (float, 0, 1.0) var acceleration = 0.5	#Aceleración
 var velocity = Vector2.ZERO
 
 # Funcion para detectar entradas de teclado
-func get_input():
+func get_input() -> void:
 	var dir = 0
 	if Input.is_action_pressed("ui_right"):
 		dir += 1
@@ -24,7 +24,8 @@ func get_input():
 		velocity.x = lerp(velocity.x, 0, friction)
 
 # Loop principal del personaje
-func _physics_process(delta):
+func _physics_process(delta) -> void:
+	print(delta)
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)

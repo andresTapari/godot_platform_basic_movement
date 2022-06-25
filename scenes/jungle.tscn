@@ -95,5 +95,5 @@ x_reaction = 0.179
 y_reaction = 0.01
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 168, 176 )
+position = Vector2( 184, 304 )
 script = ExtResource( 9 )
