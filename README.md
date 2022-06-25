@@ -10,6 +10,7 @@ El objetivo del proyecto es crear un ejemplo simple pero didactico del movimient
 - [ ] Movimiento del personaje (visual script)
 - [x] Animaciones del personaje
 - [x] Agarre de borde
+- [ ] Tile Map y LVL
 - [ ] Dialogos
 - [ ] Hud
 
