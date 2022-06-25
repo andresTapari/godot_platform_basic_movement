@@ -92,8 +92,9 @@ zoom = Vector2( 0.5, 0.5 )
 script = ExtResource( 8 )
 camera_target = NodePath("../KinematicBody2D")
 x_reaction = 0.179
-y_reaction = 0.01
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 184, 304 )
+position = Vector2( 240, 104 )
 script = ExtResource( 9 )
+friction = 0.1
+gravedad = 400.0

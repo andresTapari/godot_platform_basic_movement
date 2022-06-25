@@ -18,3 +18,5 @@ frames = ExtResource( 1 )
 animation = "idle"
 frame = 9
 playing = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
