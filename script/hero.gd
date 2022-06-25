@@ -18,14 +18,6 @@ onready var state_machine = animation_tree_node.get("parameters/playback")
 var is_on_edge: bool = false
 var velocity = Vector2.ZERO
 
-enum state {idle,					# estar
-			run,					# correr
-			jump,					# saltar
-			fall,					# caer
-			on_edge					# borde
-		}
-var current_state = state.idle
-
 # Inicio del personaje:
 func _ready() -> void:
 	state_machine.start("idle")
@@ -58,9 +50,11 @@ func _physics_process(delta) -> void:
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
 
+	if !is_on_edge:
+		velocity.y += gravity * delta
 	
+	velocity = check_grab_edge(velocity)
 	update_animation(velocity)
-	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
@@ -84,5 +78,9 @@ func update_animation(current_direction: Vector2) -> void:
 			state_machine.travel('edge_grab')
 
 func check_grab_edge(current_velocity) -> Vector2:
-	
+	rayCastEdge.update()
+	rayCastWall.update()
+	if !rayCastEdge.is_colliding() and rayCastWall.is_colliding() and !is_on_edge:
+		is_on_edge = true
+		current_velocity.y = 0
 	return current_velocity
