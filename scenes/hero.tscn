@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/res/hero_animation_player.tres" type="Animation" id=1]
 [ext_resource path="res://script/hero.gd" type="Script" id=2]
@@ -9,6 +9,21 @@ height = 16.0
 
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/animation_sprite_sheet-sheet.png-9086c1aaf0326cfb162e0d9819533e86.stex"
+
+[sub_resource type="Animation" id=43]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 24 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "falling"
@@ -44,7 +59,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "jump"
-length = 0.4
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -52,10 +67,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 20, 21, 22, 23 ]
+"values": [ 20, 21 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -118,30 +133,44 @@ states/edge_grab/position = Vector2( 869, 104 )
 states/falling/node = SubResource( 28 )
 states/falling/position = Vector2( 478, -11 )
 states/idle/node = SubResource( 29 )
-states/idle/position = Vector2( 347, 104 )
+states/idle/position = Vector2( 348, 104 )
 states/jump/node = SubResource( 30 )
 states/jump/position = Vector2( 643, 104 )
 states/run/node = SubResource( 31 )
 states/run/position = Vector2( 478, 225 )
 transitions = [ "idle", "run", SubResource( 32 ), "run", "idle", SubResource( 33 ), "run", "jump", SubResource( 34 ), "jump", "run", SubResource( 35 ), "jump", "idle", SubResource( 36 ), "idle", "jump", SubResource( 37 ), "jump", "edge_grab", SubResource( 38 ), "edge_grab", "jump", SubResource( 39 ), "falling", "idle", SubResource( 40 ), "run", "falling", SubResource( 41 ), "jump", "falling", SubResource( 42 ) ]
 start_node = "idle"
-graph_offset = Vector2( 119, -75 )
+graph_offset = Vector2( 69, -28 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
+jump_speed = -250
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
 shape = SubResource( 1 )
 
+[node name="RayCast" type="Position2D" parent="."]
+
+[node name="RayCast2D_wall" type="RayCast2D" parent="RayCast"]
+position = Vector2( 0, -13 )
+enabled = true
+cast_to = Vector2( 15, 0 )
+
+[node name="RayCast2D_edge" type="RayCast2D" parent="RayCast"]
+position = Vector2( 0, -24 )
+enabled = true
+cast_to = Vector2( 15, 0 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 4 )
 hframes = 30
-frame = 13
+frame = 24
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 43 )
 anims/edge_grab = ExtResource( 1 )
 anims/falling = SubResource( 5 )
 anims/idle = SubResource( 3 )
