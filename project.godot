@@ -10,9 +10,9 @@ config_version=4
 
 [application]
 
-config/name="godot_basic_platform_movement"
+config/name="Jungle Adventure"
 run/main_scene="res://scenes/jungle.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/Jungle Asset Pack/icon.png"
 
 [display]
 
