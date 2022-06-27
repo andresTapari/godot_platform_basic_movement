@@ -28,32 +28,39 @@ func _ready() -> void:
 func _physics_process(delta) -> void:
 	var dir: int = 0
 	# Teclas presionadas:
+	# Si presionamos derecha
 	if Input.is_action_pressed("ui_right"):
-		sprite.flip_h = false
-		dir += 1
-		rayCast.scale.x = 1
+		sprite.flip_h = false		# Rotamos los sprite ->
+		dir += 1					# Dirección x ->
+		rayCast.scale.x = 1			# Raycast x->
 	
+	# Si presionamos izquierda
 	if Input.is_action_pressed("ui_left"):
-		sprite.flip_h = true
-		dir -= 1
-		rayCast.scale.x = -1
+		sprite.flip_h = true		# Rotamos los sprite <-
+		dir -= 1					# Dirección x <-
+		rayCast.scale.x = -1		# Raycast x <-
 	
+	# Si presionamos abajo
 	if Input.is_action_pressed('ui_down'):
-		is_on_edge = false
-		disable_raycast()
+		is_on_edge = false			# Apagamos la bandera del borde
+		disable_raycast()			# Apagamos los raycast
 
+	# Si presionamos arriba
 	if Input.is_action_pressed("ui_up"):
-		if is_on_floor():
-			velocity.y = jump_speed
-		if is_on_edge:
-			is_on_edge = false
-			velocity.y = grab_jump
-			disable_raycast()
+		if is_on_floor():			# Si esta sobre el suelo
+			velocity.y = jump_speed # Salto
+		if is_on_edge:				# Si esta sobre el borde
+			is_on_edge = false		# Apagamos bandera del borde
+			velocity.y = grab_jump	# Salto de borde
+			disable_raycast()		# Apagamos los raycast
 
 	# Direccion de movimiento
+	# Si hay movimiento
 	if dir != 0:
+		# La volodicdad en x es la direccion del movimiento por la aceleración
 		velocity.x = lerp(velocity.x, dir * speed, acceleration)
 	else:
+		# La volodicdad en x es la direccion del movimiento por la fricción
 		velocity.x = lerp(velocity.x, 0, friction)
 	# 
 	if !is_on_edge:

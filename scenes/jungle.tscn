@@ -76,8 +76,7 @@ y_reaction = 0.25
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 40, 311 )
-jump_speed = -280
-friction = 0.5
+jump_speed = -200
 
 [node name="Fondo" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
