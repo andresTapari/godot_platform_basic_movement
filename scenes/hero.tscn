@@ -154,18 +154,19 @@ height = 6.0
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
 jump_speed = -250
+friction = 0.45
 
 [node name="RayCast" type="Position2D" parent="."]
 
 [node name="RayCast2D_wall" type="RayCast2D" parent="RayCast"]
 position = Vector2( 0, -14 )
 enabled = true
-cast_to = Vector2( 15, 0 )
+cast_to = Vector2( 10, 0 )
 
 [node name="RayCast2D_edge" type="RayCast2D" parent="RayCast"]
 position = Vector2( 0, -20 )
 enabled = true
-cast_to = Vector2( 15, 0 )
+cast_to = Vector2( 10, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 4 )
