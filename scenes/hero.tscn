@@ -137,7 +137,7 @@ states/run/node = SubResource( 31 )
 states/run/position = Vector2( 478, 225 )
 transitions = [ "idle", "run", SubResource( 32 ), "run", "idle", SubResource( 33 ), "run", "jump", SubResource( 34 ), "jump", "run", SubResource( 35 ), "jump", "idle", SubResource( 36 ), "idle", "jump", SubResource( 37 ), "jump", "edge_grab", SubResource( 38 ), "edge_grab", "jump", SubResource( 39 ), "falling", "idle", SubResource( 40 ), "run", "falling", SubResource( 41 ), "jump", "falling", SubResource( 42 ) ]
 start_node = "idle"
-graph_offset = Vector2( -95, -298 )
+graph_offset = Vector2( 91, -41 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
@@ -171,7 +171,7 @@ cast_to = Vector2( 10, 0 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = SubResource( 4 )
 hframes = 30
-frame = 24
+frame = 15
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 43 )
